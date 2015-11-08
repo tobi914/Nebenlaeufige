@@ -1,0 +1,30 @@
+﻿Zustand 1: NEW
+ - der Lebenslauf eines Thread-Objekts beginnt mit 'new'
+ - jedoch noch nicht im Zustand ausführend
+ - neuer Thread, jedoch noch nicht gestartet
+
+Zustand 2: RUNNABLE
+ - beginnt mit 'start', läuft in der JVM
+ - kann sich ändern, wenn ein anderer Thread zur Ausführung gelangt und dem aktuellen Thread den Prozessor entzieht
+ - vormaliger Thread ist dann solange im Zustand nicht laufend, bis Scheduler ihm wieder Rechenzeit zuordnet
+
+Zustand 3: WAITING
+ - kann mit wait() oder join() (ohne Timeout) erreicht werden
+ - wartet z.B. auf ein notify().
+ - Ein-/Ausgabefunktionen, Thread verweilt in Wartezusatnd
+
+Zustand 4: TIMED WAITING
+ - kann mit einem 'sleep()' erreicht werden
+ - kann mit wait() oder join() (mitTimeout) erreicht werden
+
+Zustand 5: BLOCKED
+ - wartet auf einen MonitorLock, wenn er etwa einen synchronized-Block betreten möchte
+ - ist geblocked, wenn er ein notify() oder notifyAll() bekommt, aber noch warten muss weil evtl. ein anderer Thread
+   auch ein notify() bekommen hat oder der erste Thread noch nicht fertig ist
+
+Zustand 6: Terminated
+ - Ausführung ist beendet, wenn
+ - run() ohne Fehler beendet wurde
+ - in der run() eine RuntimeExeption geworfen wird
+ - Thread mittels stop() von aussen unterbrochen wird
+ - die VM beendet wird und alle Threads 'tötet'
